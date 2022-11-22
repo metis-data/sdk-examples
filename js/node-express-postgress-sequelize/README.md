@@ -23,7 +23,6 @@ Using the [DOC](https://docs.metisdata.io/metis/sdk-integration/javascript-seque
 ### run express docker
 
 `docker-compose run --rm api bash`
-`docker-compose`
 
 3 - open [localhost:3000](http://localhost:3000/api/student) you should see empty array `[ ]` because you still not add any data to PostgreSQL yet, feel free update it 😉 but any rest request will send all necessary data to Metis
 
