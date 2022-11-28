@@ -3,12 +3,40 @@
 /**
  * Module dependencies.
  */
+const {SequelizeExpressInterceptor} = require('@metis-data/sequelize-express-interceptor');
+
+const interceptor = SequelizeExpressInterceptor.create({
+  serviceName: 'your-service-name', // The name of the service
+  serviceVersion: '0.0.1', // The version of the service
+  exporterUrl: 'https://ingest.metisdata.io',
+  exporterApiKey: '<API_KEY>', // The api key from https://app.metisdata.io/
+});
+
 
 var app = require('../app');
 var debug = require('debug')('node-sequelize:server');
 var http = require('http');
 var models = require('../models');
 
+
+
+/**
+ *  START METIS REQUIRED MIDDLEWARE
+ */
+
+interceptor.instrument(
+    models.sequelize, // The Sequelize instance for getting the plan
+    {
+      errorHandler: console.error, // Error handler, errors are still reporterd to metis' Sentry account
+      shouldCollectPlans: true, // Get the plan for each intercepted query (default to true)
+      excludedUrls: [/favicon.ico/], // URLs to exclude from tracing
+      printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
+    }
+);
+
+/**
+ *  END METIS REQUIRED MIDDLEWARE
+ */
 /**
  * Sync Database
  */
