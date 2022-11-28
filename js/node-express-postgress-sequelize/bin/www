@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 const {SequelizeExpressInterceptor} = require('@metis-data/sequelize-express-interceptor');
+const {initSequelize} = require("../models/init");
 
 const interceptor = SequelizeExpressInterceptor.create({
   serviceName: 'your-service-name', // The name of the service
@@ -12,20 +13,10 @@ const interceptor = SequelizeExpressInterceptor.create({
   exporterApiKey: '<API_KEY>', // The api key from https://app.metisdata.io/
 });
 
-
-var app = require('../app');
-var debug = require('debug')('node-sequelize:server');
-var http = require('http');
-var models = require('../models');
-
-
-
-/**
- *  START METIS REQUIRED MIDDLEWARE
- */
+const db = initSequelize()
 
 interceptor.instrument(
-    models.sequelize, // The Sequelize instance for getting the plan
+    db.sequelize, // The Sequelize instance for getting the plan
     {
       errorHandler: console.error, // Error handler, errors are still reporterd to metis' Sentry account
       shouldCollectPlans: true, // Get the plan for each intercepted query (default to true)
@@ -33,6 +24,18 @@ interceptor.instrument(
       printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
     }
 );
+
+var app = require('../app');
+var debug = require('debug')('node-sequelize:server');
+var http = require('http');
+var models = require('../models');
+
+
+/**
+ *  START METIS REQUIRED MIDDLEWARE
+ */
+
+
 
 /**
  *  END METIS REQUIRED MIDDLEWARE
