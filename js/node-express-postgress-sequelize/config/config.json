@@ -1,25 +1,25 @@
 {
   "development": {
     "username": "postgres",
-    "password": "test",
-    "database": "test",
-    "host": "127.0.0.1",
+    "password": "Trustno1",
+    "database": "node-express-postgress-sequelize",
+    "host": "3.69.95.41",
     "port": 5432,
-    "dialect": "postgresql"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "test",
-    "database": "test",
-    "host": "127.0.0.1",
+    "password": "Trustno1",
+    "database": "node-express-postgress-sequelize",
+    "host": "3.69.95.41",
     "port": 5432,
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "test",
-    "database": "test",
-    "host": "127.0.0.1",
+    "password": "Trustno1",
+    "database": "node-express-postgress-sequelize",
+    "host": "3.69.95.41",
     "port": 5432,
     "dialect": "postgres"
   }
