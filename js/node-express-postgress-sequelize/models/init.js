@@ -1,37 +1,32 @@
-const process = require("process");
-const Sequelize = require("sequelize");
-const {creds} = require('../config');
+const { creds } = require("../config");
 let db;
 
 function getInstance() {
-    if (!db) {
-        db = {};
-        const Sequelize = require("sequelize");
-        db.sequelize = new Sequelize(
-            creds.database,
-            creds.username,
-            creds.password,
-            creds,
-        );
-        db.Sequelize = Sequelize;
-    }
+  db = {};
+  const Sequelize = require("sequelize");
+  db.sequelize = new Sequelize(
+    creds.database,
+    creds.username,
+    creds.password,
+    creds,
+  );
+  db.Sequelize = Sequelize;
 
-    return db;
+  return db;
 }
 
-
 function initSequelize() {
-    const db = getInstance();
-    Object.keys(db).forEach((modelName) => {
-        if (db[modelName].associate) {
-            db[modelName].associate(db);
-        }
-    });
+  const db = getInstance();
+  Object.keys(db).forEach((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
+  });
 
-    return db;
+  return db;
 }
 
 module.exports = {
-    initSequelize,
-    getInstance,
-}
+  initSequelize,
+  getInstance,
+};
