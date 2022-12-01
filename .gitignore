@@ -6,6 +6,16 @@ __pycache__/
 # C extensions
 *.so
 
+./python/venv
+./python/async-fastapi-sqlalchemy/pgdata
+./python/async-fastapi-sqlalchemy/venv
+./python/async-fastapi-sqlalchemy/migrations
+
+*__pycache__*
+
+*/pgdata
+
+*/base/1*
 # Distribution / packaging
 .Python
 build/
