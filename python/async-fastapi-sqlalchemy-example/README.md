@@ -28,6 +28,10 @@ $ . venv/bin/activate
   -p 5432:5432 \
   postgres:14.4-alpine
 
+```shell
+. venv/bin/activate
+```
+
 (venv) $ APP_CONFIG_FILE=local alembic upgrade head
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
