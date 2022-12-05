@@ -61,12 +61,14 @@ pip install -r requirements.txt
 | ------------ | --------------------------------------- |
 | DATABASE_URL | postgresql://user:password@host:port/db |
 
+export DATABASE_URL=postgressql://randymarsh@reallySecurePassword@southparkhost:5432/mydatabase
+
 example: postgressql://randymarsh@reallySecurePassword@southparkhost:5432/mydatabase
 
 - To run the project
 
 ```bash
-uvicorn main:app
+./env/bin/uvicorn main:app
 ```
 
 ## Contributors

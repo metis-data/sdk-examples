@@ -49,7 +49,7 @@ env/bin/activate
 pip install -r requirements.txt
 ```
 
-### Create the database
+### Create the database - You will need an empty database with the name you encounter in database.py
 ``` python create_db.py ```
 
 ## Run the API
