@@ -1,0 +1,6 @@
+alembic
+black
+fastapi
+sqlalchemy[postgresql_asyncpg]
+uvicorn[standard]
+
