@@ -1,36 +1,38 @@
 [![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/logo-l.png)](https://www.metisdata.io/)
 
-# Node.js, Express.js, Sequelize.js and PostgreSQL RESTful API
+# Sequelize, Node.js, Express and PostgreSQL RESTful API
 
 Using the [DOC](https://docs.metisdata.io/metis/sdk-integration/javascript-sequelize) of [Metis](https://app.metisdata.io/) and this source code is part of [Node.js, Express.js, Sequelize.js and PostgreSQL RESTful API](https://www.djamware.com/post/5b56a6cc80aca707dd4f65a9/nodejs-expressjs-sequelizejs-and-postgresql-restful-api) tutorial.
 
 ## Setup
 
-1 - Add **METIS_API_KEY** into `./models/index.js#L43`
+### 1. Insert API Key
+Insert your api key into `METIS_API_KEY` at `./models/index.js line:43`
 
-2 - To run locally:
+### 2. Setup a local PostgreSQL Database.
 
-- Make sure you have install and run PostgreSQL server
-- Create database with the name same as in config file
-- Run `npm install` or `yarn install`
-- Run `sequelize db:migrate`
-- Run `nodemon` or `npm start`
+<ins>Option 1</ins>: Native PostgreSLQ
+- Install PostgreSQL locally.
+- Create a Database with a name matching `development.test` inside `./config/config.json`.
+- Run `npm install`.
+- Run `sequelize db:migrate`.
 
-### run database
 
+<ins>Option 2</ins>: Docker Database
 `docker-compose up db`
 
-### run express docker
+### 3. Run
+<ins>Option 1</ins>: Native Express Server
+- Run `npm start`.
 
+<ins>Option 2</ins>: Docker
 `docker-compose run --rm api bash`
 
-3 - open [localhost:3000](http://localhost:3000/api/student) you should see empty array `[ ]` because you still not add any data to PostgreSQL yet, feel free update it 😉 but any rest request will send all necessary data to Metis
+### 3. Trigger your Database.
+Open [localhost:3000](http://localhost:3000/api/student) and play around. 
 
-4 - navigate to [Metis](https://app.metisdata.io/activities) and verify in filter that you select the **METIS_API_KEY** and result should show all yours traces
+### 4. Go to Metis
+Navigate to [Metis](https://app.metisdata.io/activities) to view your recent activity.
 
-## FINISH 🎉
-
-### PS
-
-You can use [Metis](https://app.metisdata.io/) for **FREE**  
-If you need help plz use the [DOC](https://docs.metisdata.io)
+## You're all set! 🎉 
+Fore more info vist our - [Documentation](https://docs.metisdata.io)
