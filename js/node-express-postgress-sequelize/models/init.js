@@ -1,5 +1,4 @@
 const { creds } = require('../config');
-const Sequelize = require("sequelize");
 let db = {};
 
 function getInstance() {
