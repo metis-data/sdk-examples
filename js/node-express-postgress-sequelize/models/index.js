@@ -7,7 +7,7 @@ const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-const SequelizeExpressInterceptor = require('@metis-data/sequelize-express-interceptor').default;
+const { SequelizeExpressInterceptor } = require('@metis-data/sequelize-express-interceptor');
 const db = {};
 
 let sequelize;
@@ -39,7 +39,6 @@ Object.keys(db).forEach((modelName) => {
 const interceptor = SequelizeExpressInterceptor.create({
   serviceName: 'your-service-name', // The name of the service
   serviceVersion: '0.0.1', // The version of the service
-  exporterUrl: 'https://ingest-stg.metisdata.io',
   exporterApiKey: 'METIS_API_KEY', // The api key from https://app.metisdata.io/
 });
 
