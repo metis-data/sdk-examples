@@ -13,7 +13,7 @@ const interceptor = SequelizeExpressInterceptor.create({
   exporterApiKey: '<API_KEY>', // The api key from https://app.metisdata.io/
 });
 
-const db = initSequelize()
+let db = initSequelize()
 
 interceptor.instrument(
     db.sequelize, // The Sequelize instance for getting the plan
@@ -24,6 +24,7 @@ interceptor.instrument(
       printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
     }
 );
+db = initSequelize()
 
 var app = require('../app');
 var debug = require('debug')('node-sequelize:server');
