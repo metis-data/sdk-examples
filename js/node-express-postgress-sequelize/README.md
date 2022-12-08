@@ -1,4 +1,4 @@
-[![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/logo-l.png)](https://www.metisdata.io/)
+[![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/metis-min-logo.png)](https://www.metisdata.io/)
 
 # Sequelize, Node.js, Express and PostgreSQL RESTful API
 
