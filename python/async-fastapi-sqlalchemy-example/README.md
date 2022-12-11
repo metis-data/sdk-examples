@@ -1,25 +1,25 @@
-# Async Web API with FastAPI + SQLAlchemy 2.0 Style
+[![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/metis-min-logo.png)](https://www.metisdata.io/)
 
-This is a sample project of Async Web API with FastAPI + SQLAlchemy 2.0 Style.
-It includes asynchronous DB access using asyncpg and test code covering them.
+# SQLAlchemy, Python, FastAPI (Async) and PostgreSQL RESTful API
 
-This sample project is explained in this blog (written in Japanese).  
-https://www.rhoboro.com/2021/06/12/async-fastapi-sqlalchemy.html
+Using the [Documentation](https://docs.metisdata.io/metis/sdk-integration/python-sqlalchemy) of [Metis](https://app.metisdata.io/).
 
-If you want to use prisma instead of sqlalchemy, see [rhoboro/async-fastapi-prisma](https://github.com/rhoboro/async-fastapi-prisma).
+## Setup
 
-# Setup
-
-## Install
-
+### 1. Install
 ```shell
 $ python3 -m venv venv
 $ . venv/bin/activate
 (venv) $ pip install -r requirements.lock
 ```
 
-## Setup a database and create tables
+### 2. Setup a local PostgreSQL Database.
 
+<ins><b>Option 1</b></ins>: Native PostgreSLQ
+- Install [PostgreSQL](https://www.postgresql.org/download/) locally.
+- Create a Database with the name 'db'.
+
+<ins><b>Option 2</b></ins>: Docker Database
 ```shell
 (venv) $ docker run -d --name db \
   -e POSTGRES_PASSWORD=password \
@@ -27,33 +27,28 @@ $ . venv/bin/activate
   -v $(pwd)/pgdata:/var/lib/postgresql/data \
   -p 5432:5432 \
   postgres:14.4-alpine
-
-```shell
-. venv/bin/activate
 ```
 
+### 3. Migrate Database
+Run
+```
 (venv) $ APP_CONFIG_FILE=local alembic upgrade head
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> a8483365f505, initial_empty
-INFO  [alembic.runtime.migration] Running upgrade a8483365f505 -> 24104b6e1e0c, add_tables
 ```
 
-# Run
+### 4. Insert API Key
+Insert your api key into `<API_KEY>` at `./app/main.py line:21`
+
+## Run
 
 ```shell
 (venv) $ APP_CONFIG_FILE=local uvicorn app.main:app --reload-dir app
 ```
 
-You can now access [localhost:8000/docs](http://localhost:8000/docs) to see the API documentation.
+### 5. Trigger your Database.
+Open [localhost:8000](http://localhost:8000/docs) and play around. 
 
+### 6. Go to Metis
+Navigate to [Metis](https://app.metisdata.io/activities) to view your recent activity.
 
-# Test
-
-```shell
-(venv) $ pip install -r requirements_test.txt
-(venv) $ black app
-(venv) $ isort app
-(venv) $ mypy app
-(venv) $ pytest app
-```
+# You're all set! 🎉 
+Fore more info vist our - [Documentation](https://docs.metisdata.io)
