@@ -36,7 +36,7 @@ docker-compose run --rm api bash
 Open [localhost:3000](http://localhost:3000/api/student) and play around. 
 
 ### 4. Go to Metis
-Navigate to [Metis](https://app.metisdata.io/activities) to view your recent activity.
+Navigate to [Metis](https://app.metisdata.io) to view your recent activity.
 
 # You're all set! 🎉 
-Fore more info vist our - [Documentation](https://docs.metisdata.io)
+Fore more info visit our - [Documentation](https://docs.metisdata.io)
