@@ -1,62 +1,48 @@
-# Build a REST API with FastAPI, PostgreSQL and SQLAlchemy
-FastAPI is a Python framework and set of tools that allow developers to invoke commonly used functions using a REST interface. 
+[![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/metis-min-logo.png)](https://www.metisdata.io/)
 
-SQLAlchemy is a package that makes it easier for Python programs to communicate with databases. Most of the time, this library is used as an Object Relational Mapper (ORM) tool, which automatically converts function calls to SQL queries and translates Python classes to tables on relational databases.
+# SQLAlchemy, Python, FastAPI (Sync) and PostgreSQL RESTful API
 
-Many web, mobile, geospatial, and analytics applications use PostgreSQL as their primary data storage or data warehouse.
+Using the [Documentation](https://docs.metisdata.io/metis/sdk-integration/python-sqlalchemy) of [Metis](https://app.metisdata.io/).
 
-This is code I wrote for the [video](https://youtu.be/2g1ZjA6zHRo)
+## Setup
 
-## How to run the REST API
-Get this project from Github
-``` 
-git clone https://github.com/jod35/Build-a-fastapi-and-postgreSQL-API-with-SQLAlchemy
- 
+### 1. Install
+```shell
+$ python3 -m venv venv
+$ . venv/bin/activate
+(venv) $ pip install -r requirements.txt
 ```
 
+### 2. Setup a local PostgeSQL Database.
 
+The example projects expects a postgres database, that has a user with name `postgres` and password as `postgres`.
 
-### Setting up the database
+<ins><b>Option 1</b></ins>: Native PostgreSLQ
+- Install [PostgreSQL](https://www.postgresql.org/download/) locally.
+- Create a Database with the name `db`.
 
-* Install PostgreSQL and create your user and database
-
-* Change this line in ` database.py ` to 
-
-``` 
-engine=create_engine("postgresql://{YOUR_DATABASE_USER}:{YOUR_DATABASE_PASSWORD}@localhost/{YOUR_DATABASE_NAME}",
-    echo=True
-)
+<ins><b>Option 2</b></ins>: Docker Database
+```shell
+(venv) $ docker run -d --name db \
+  -e POSTGRES_PASSWORD=postgres \
+  -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -v $(pwd)/pgdata:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  postgres:14.4-alpine
 ```
 
-### Create a virtual environment
-This can be done with 
-``` python -m venv env ```
+### 3. Insert API Key
+Insert your api key into `<API_KEY>` at `./main.py line:26`
 
-activate the virtual environment with 
-
-``` 
-chmod +x env/bin/activate
-```
-build
-``` 
-env/bin/activate
-```
-
-
-### Install the requirements 
-
-``` 
-pip install -r requirements.txt
-```
-
-### Create the database - You will need an empty database with the name you encounter in database.py
+### 4. Migrate Database
+Run \
 ``` python create_db.py ```
 
-## Run the API
+### 5. Run
 ``` uvicorn main:app ```
 
-## Original Creator
-[Ssali Jonathan](https://github.com/jod35)
+### 6. Go to Metis
+Navigate to [Metis](https://app.metisdata.io) to view your recent activity.
 
-## Update by
-[Gideon Shmila](https://github.com/gideons)
+# You're all set! 🎉 
+Fore more info visit our - [Documentation](https://docs.metisdata.io)
