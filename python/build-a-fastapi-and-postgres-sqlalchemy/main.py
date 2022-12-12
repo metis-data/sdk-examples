@@ -22,9 +22,9 @@ class Item(BaseModel): #serializer
 
 db=SessionLocal()
 
-instrumentation: MetisInstrumentor = setup('<SERVICE_NAME>',
+instrumentation: MetisInstrumentor = setup('example_service',
                       api_key='<API_KEY>',
-                      service_version='<SERVICE_NAME>'
+                      service_version='1.0.0'
                       )
 
 instrumentation.instrument_app(app, engine)

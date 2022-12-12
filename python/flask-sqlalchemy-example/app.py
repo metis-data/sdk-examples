@@ -12,7 +12,7 @@ with app.app_context():
     migrate = Migrate(app, db)
 
     instrumentation: MetisInstrumentor = setup('cars-web-server',
-                        api_key='c1JYt2QdiM6RAF2S2q8WN21o9q2IYgaP8SUZhIMG',
+                        api_key='oa5fIxNEA674hpJQoBQ0253L3wwthk3ONt4B8XQ4',
                         service_version='1.1' 
                                             ) 
 
