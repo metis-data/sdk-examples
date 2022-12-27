@@ -3,11 +3,47 @@
 /**
  * Module dependencies.
  */
+require('dotenv').config()
+const process = require('process');
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[env];
+const { SequelizeExpressInterceptor } = require('@metis-data/sequelize-express-interceptor');
+const Sequelize = require('sequelize');
 
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
+/**
+ *  START METIS REQUIRED MIDDLEWARE
+ */
+
+const interceptor = SequelizeExpressInterceptor.create({
+  serviceName: 'your-service-name', // The name of the service
+  serviceVersion: '0.0.1', // The version of the service
+});
+
+interceptor.instrument(
+    sequelize, // The Sequelize instance for getting the plan
+    {
+      errorHandler: console.error, // Error handler, errors are still reporterd to metis' Sentry account
+      shouldCollectPlans: true, // Get the plan for each intercepted query (default to true)
+      excludedUrls: [/favicon.ico/], // URLs to exclude from tracing
+      printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
+    }
+);
+
+/**
+ *  END METIS REQUIRED MIDDLEWARE
+ */
+
+var models = require('../models');
 var app = require('../app');
 var debug = require('debug')('node-sequelize:server');
 var http = require('http');
-var models = require('../models');
 
 /**
  * Sync Database

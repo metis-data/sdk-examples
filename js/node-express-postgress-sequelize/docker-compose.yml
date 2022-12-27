@@ -4,10 +4,11 @@ services:
   api:
     build: .
     environment:
-      DB_USERNAME: postgres
-      DB_PASSWORD: test
-      DB_NAME: test
-      DB_HOSTNAME: DB_HOSTNAME
+      PGUSER: postgres
+      PGPASSWORD: test
+      PGDATABASE: test
+      PGHOST: db
+      PGPORT: 5432
     ports:
       - 3000:3000
     depends_on:
