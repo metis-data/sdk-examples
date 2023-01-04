@@ -3,6 +3,7 @@ services:
 
   postgres:
     image: postgres:13.5
+    container_name: prisma_postgres
     restart: always
     environment:
       - POSTGRES_USER=myuser
