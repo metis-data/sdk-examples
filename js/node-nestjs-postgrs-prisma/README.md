@@ -28,12 +28,10 @@ A simple backend REST API for a blog built using NestJS, Prisma, PostgreSQL and 
     METIS_SERVICE_NAME=<REPLACE_IT>
     METIS_SERVICE_VERSION=<REPLACE_IT>
     ```
-4. generate db client: `npx prisma generate`
-5. Apply database migrations: `npx prisma migrate dev` 
-6. Start the project:  `npm run start:dev`
-7. visit `http://localhost:3000/api` for seeing the available endpoints
-8. visit a specific endpoint such: `http://localhost:3000/articles`
-9. visit `https://metisdata.io/activities/<YOUR_API_KEY>`
+4. Start the project:  `npm run start`
+5. visit `http://localhost:3000/api` for seeing the available endpoints
+6. visit a specific endpoint such: `http://localhost:3000/articles`
+7. visit `https://metisdata.io/activities/<YOUR_API_KEY>`
 
 ## Your'e all set! Happy Metising!  &nbsp; 🎉🎉 🎉 
 
