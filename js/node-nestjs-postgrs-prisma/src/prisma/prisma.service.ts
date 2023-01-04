@@ -20,13 +20,6 @@ export class PrismaService extends PrismaClient {
   }
 
   async onModuleInit() {
-    // this.$on('query', (e) => {
-    //   debugger;
-    //   console.log('Query: ' + e.query)
-    //   console.log('Params: ' + e.params)
-    //   console.log('Duration: ' + e.duration + 'ms')
-    // })
-    // await this.$connect();
     setInstrumentedPrismaClient(this)
   }
 }
