@@ -19,8 +19,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@metis-data/prisma-interceptor": "^2.0.6",
-    "@metis-data/prisma-nest-interceptor": "^2.0.6",
+    "@metis-data/prisma-interceptor": "*",
+    "@metis-data/prisma-nest-interceptor": "*",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
