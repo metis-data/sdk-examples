@@ -6,4 +6,4 @@ COPY ./* ./
 
 RUN pip install --no-cache-dir --upgrade -r ./requirements.lock
 
-CMD ["APP_CONFIG_FILE=", "uvicorn", "app.main:app"]
+CMD ["uvicorn", "app.main:app"]
