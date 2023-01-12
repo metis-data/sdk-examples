@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI,status,HTTPException
 from fastapialchemycollector import setup, MetisInstrumentor, PlanCollectType
 from pydantic import BaseModel
@@ -5,6 +6,7 @@ from typing import Optional,List
 from database import SessionLocal
 from database import engine 
 import models
+import os
 
 app=FastAPI()
 
@@ -22,9 +24,12 @@ class Item(BaseModel): #serializer
 
 db=SessionLocal()
 
-instrumentation: MetisInstrumentor = setup('<SERVICE_NAME>',
-                      api_key='<API_KEY>',
-                      service_version='<SERVICE_NAME>'
+METIS_API_KEY = os.environ.get("METIS_API_KEY")
+METIS_SERVICE_NAME = os.environ.get("METIS_SERVICE_NAME")
+
+instrumentation: MetisInstrumentor = setup(METIS_SERVICE_NAME,
+                      api_key=METIS_API_KEY,
+                      service_version=METIS_SERVICE_NAME
                       )
 
 instrumentation.instrument_app(app, engine)
@@ -88,3 +93,7 @@ def delete_item(item_id:int):
     db.commit()
 
     return item_to_delete
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT")) or 8080
+    uvicorn.run(app, host="0.0.0.0", port=port)
