@@ -18,7 +18,7 @@ async def health() -> JSONResponse:
 
 instrumentation: MetisInstrumentor = setup(
     "<SERVICE_NAME>",
-    api_key="<API_KEY>",
+    api_key="5fKlWqNTyh2YlpN0i4QZA7OF8fRg8xtf40i109Rm",
     service_version="<SERVICE_VERSION>",
 )
 
