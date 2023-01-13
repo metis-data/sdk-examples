@@ -1,6 +1,3 @@
-Get all songs: [http://localhost:8004/songs](http://localhost:8004/songs)
-
-
 [![metis](https://static-asserts-public.s3.eu-central-1.amazonaws.com/metis-min-logo.png)](https://www.metisdata.io/)
 
 # SQLAlchemy, Python, FastAPI (Async) and PostgreSQL RESTful API
