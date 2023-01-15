@@ -10,4 +10,4 @@ SQLAlchemy==1.4.44
 starlette==0.22.0
 typing-extensions==3.10.0.0
 uvicorn==0.14.0
-fastapialchemycollector==1.2.0
+fastapialchemycollector==1.0.0
