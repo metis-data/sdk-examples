@@ -4,11 +4,11 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlmodel import SQLModel
 
 from alembic import context
 
-from app.db import async_engine
-from app.models.base import Base
+from app.models import Song
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -22,19 +22,12 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata
+target_metadata = SQLModel.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-
-
-def include_object(obj, name, type_, reflected, compare_to):
-    if obj.info.get("skip_autogen", False):
-        return False
-
-    return True
 
 
 def run_migrations_offline():
@@ -55,11 +48,6 @@ def run_migrations_offline():
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
-        # MATERIALIZED VIEW など無視する場合は下記をクラス属性に設定する
-        # __table_args__ = {"info": {"skip_autogen": True}}
-        include_object=include_object,
-        # 型変更を検知する
-        compare_type=True,
     )
 
     with context.begin_transaction():
@@ -67,16 +55,7 @@ def run_migrations_offline():
 
 
 def do_run_migrations(connection):
-    context.configure(
-        connection=connection,
-        target_metadata=target_metadata,
-        dialect_opts={"paramstyle": "named"},
-        # MATERIALIZED VIEW など無視する場合は下記をクラス属性に設定する
-        # __table_args__ = {"info": {"skip_autogen": True}}
-        include_object=include_object,
-        # 型変更を検知する
-        compare_type=True,
-    )
+    context.configure(connection=connection, target_metadata=target_metadata)
 
     with context.begin_transaction():
         context.run_migrations()
@@ -95,9 +74,6 @@ async def run_migrations_online():
             prefix="sqlalchemy.",
             poolclass=pool.NullPool,
             future=True,
-            # ローカルのDockerコンテナで動かすため下記エラーを抑制
-            # ConnectionError: PostgreSQL server at "localhost:5432" rejected SSL upgrade
-            connect_args={"ssl": None}
         )
     )
 

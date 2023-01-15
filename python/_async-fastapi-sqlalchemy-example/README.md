@@ -52,3 +52,7 @@ Navigate to [Metis](https://app.metisdata.io/activities) to view your recent act
 
 # You're all set! 🎉 
 Fore more info vist our - [Documentation](https://docs.metisdata.io)
+
+
+
+

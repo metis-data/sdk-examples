@@ -20,20 +20,22 @@ if (config.use_env_variable) {
 /**
  *  START METIS REQUIRED MIDDLEWARE
  */
+const { METIS_SERVICE_NAME: serviceName, METIS_SERVICE_VERSION: serviceVersion, METIS_API_KEY: apiKey } = process.env;
 
 const interceptor = SequelizeExpressInterceptor.create({
-  serviceName: 'your-service-name', // The name of the service
-  serviceVersion: '0.0.1', // The version of the service
+  serviceName, // The name of the service
+  serviceVersion, // The version of the service
+  apiKey,
 });
 
 interceptor.instrument(
-    sequelize, // The Sequelize instance for getting the plan
-    {
-      errorHandler: console.error, // Error handler, errors are still reporterd to metis' Sentry account
-      shouldCollectPlans: true, // Get the plan for each intercepted query (default to true)
-      excludedUrls: [/favicon.ico/], // URLs to exclude from tracing
-      printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
-    }
+  sequelize, // The Sequelize instance for getting the plan
+  {
+    errorHandler: console.error, // Error handler, errors are still reporterd to metis' Sentry account
+    shouldCollectPlans: true, // Get the plan for each intercepted query (default to true)
+    excludedUrls: [/favicon.ico/], // URLs to exclude from tracing
+    printToConsole: true, // Print outgoing spans in console (default to false, passed to exporter)
+  }
 );
 
 /**
