@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@metis-data/sequelize-express-interceptor": "*",
+    "@metis-data/sequelize-express-interceptor": "^2.0.9",
     "cookie-parser": "^1.4.5",
     "debug": "^4.1.1",
     "dotenv": "^16.0.3",
