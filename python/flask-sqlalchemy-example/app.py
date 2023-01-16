@@ -20,11 +20,7 @@ with app.app_context():
     METIS_API_KEY = os.getenv('METIS_API_KEY')
     METIS_SERVICE_VERSION = os.getenv('METIS_SERVICE_VERSION')
 
-    instrumentation: MetisInstrumentor = setup(
-                        METIS_SERVICE_NAME,
-                        api_key=METIS_API_KEY,
-                        service_version=METIS_SERVICE_VERSION 
-                        ) 
+    instrumentation: MetisInstrumentor = setup(METIS_SERVICE_NAME,api_key=METIS_API_KEY,service_version=METIS_SERVICE_VERSION) 
 
     instrumentation.instrument_app(app, db.get_engine())
     class CarsModel(db.Model):
@@ -105,10 +101,6 @@ with app.app_context():
             return {"message": f"Car {car.name} successfully deleted."}
 
 
-
-
-
-
     if __name__ == '__main__':
-        port = os.getenv("PORT")
-        app.run(debug=True,port=port)
+        port = int(os.getenv("PORT")) or 5000
+        app.run(debug=True, host="0.0.0.0", port=port)
