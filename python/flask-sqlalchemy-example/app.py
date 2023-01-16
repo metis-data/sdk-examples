@@ -1,20 +1,30 @@
+import os
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemycollector import setup, MetisInstrumentor, PlanCollectType
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
 with app.app_context():
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/cars_api"
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
 
-    instrumentation: MetisInstrumentor = setup('cars-web-server',
-                        api_key='<API_KEY>',
-                        service_version='1.1' 
-                                            ) 
+    METIS_SERVICE_NAME = os.getenv('METIS_SERVICE_NAME')
+    METIS_API_KEY = os.getenv('METIS_API_KEY')
+    METIS_SERVICE_VERSION = os.getenv('METIS_SERVICE_VERSION')
+
+    instrumentation: MetisInstrumentor = setup(
+                        METIS_SERVICE_NAME,
+                        api_key=METIS_API_KEY,
+                        service_version=METIS_SERVICE_VERSION 
+                        ) 
 
     instrumentation.instrument_app(app, db.get_engine())
     class CarsModel(db.Model):
