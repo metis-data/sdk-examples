@@ -2,16 +2,17 @@ import { startMetisInstrumentation } from './tracer';
 startMetisInstrumentation();
 
 import { NestFactory } from '@nestjs/core';
-import { execSync } from 'child_process';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { parse } from 'pg-connection-string';
 import { ValidationPipe } from '@nestjs/common';
+// import { execSync } from 'child_process';
+// import { parse } from 'pg-connection-string';
 
 async function bootstrap() {
-  const connectionString = process.env.DATABASE_URL;
-  const dbConfig = parse(connectionString);
-  execSync(`psql -U postgres -d ${dbConfig.database} -a -f ./dump.sql`);
+  // Seed
+  // const connectionString = process.env.DATABASE_URL;
+  // const dbConfig = parse(connectionString);
+  // execSync(`psql -U postgres -d ${dbConfig.database} -a -f ./dump.sql`);
 
   const app = await NestFactory.create(AppModule);
 
