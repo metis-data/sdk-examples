@@ -7,14 +7,10 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { parse } from 'pg-connection-string';
 import { ValidationPipe } from '@nestjs/common';
-import { Client } from 'pg';
 
-let client: Client;
 async function bootstrap() {
-  const connectionString = process.env.PG_CONNECTION_STRING;
+  const connectionString = process.env.DATABASE_URL;
   const dbConfig = parse(connectionString);
-  client = new Client({ connectionString });
-  await client.connect();
   execSync(`psql -U postgres -d ${dbConfig.database} -a -f ./dump.sql`);
 
   const app = await NestFactory.create(AppModule);

@@ -4,7 +4,7 @@ import { PG_CONNECTION } from './pg.consts';
 
 const dbProvider = {
     provide: PG_CONNECTION,
-    useValue: new Pool({ connectionString: process.env.PG_CONNECTION_STRING }),
+    useValue: new Pool({ connectionString: process.env.DATABASE_URL }),
 };
 
 @Module({
