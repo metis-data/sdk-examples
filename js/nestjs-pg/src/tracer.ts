@@ -14,7 +14,7 @@ import { Client } from 'pg';
 
 let tracerProvider: BasicTracerProvider;
 const client: Client = new Client({
-  connectionString: process.env.PG_CONNECTION_STRING,
+  connectionString: process.env.DATABASE_URL,
 });
 
 process.on('SIGINT', () => {

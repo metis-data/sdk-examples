@@ -2,13 +2,22 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { PG_CONNECTION } from '../pg/pg.consts';
+import { Pool } from 'pg';
 
 @Injectable()
 export class ArticlesService {
-  constructor(@Inject(PG_CONNECTION) private pg: any) {}
+  constructor(@Inject(PG_CONNECTION) private pg: Pool) {}
 
   async create(createArticleDto: CreateArticleDto) {
-    return this.pg.query(`INSERT INTO article (title, description, body, published) VALUES ('${createArticleDto.title}', ${createArticleDto.description ? `'${createArticleDto.description}'` : null}, '${createArticleDto.body}', ${createArticleDto.published})`);
+    return this.pg.query(
+`INSERT INTO article (title, description, body, published) 
+                 VALUES (
+                   '${createArticleDto.title}', 
+                   ${createArticleDto.description ? `'${createArticleDto.description}'` : null}, 
+                   '${createArticleDto.body}', 
+                   ${createArticleDto.published}
+                 )`
+    );
   }
 
   async findDrafts() {
