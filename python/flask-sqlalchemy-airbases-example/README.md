@@ -1,6 +1,5 @@
 
-## Getting Started
-
+## Run from terminal
 ### Prerequisites
 
 Kindly ensure you have the following installed:
@@ -24,3 +23,19 @@ Kindly ensure you have the following installed:
 3. Navigate to `http://localhost:5000/aircraft`.
 
 4. Open Metis app app and the query span.
+
+## Run  using docker
+
+1.   ``` 
+      docker build -t flask-app .
+     ```
+    
+2.  ```
+     docker run -p 8080:5000 flask-app
+    ```
+
+3. Navigate to `http://localhost:8080/aircraft`.
+
+4. Open Metis app app and the query span.
+
+

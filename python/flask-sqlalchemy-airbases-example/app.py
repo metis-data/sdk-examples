@@ -6,8 +6,14 @@ import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+take_env_from_docker_file = os.environ.get('TAKE_ENV_FROM_DOCKER_FILE')
+
+if take_env_from_docker_file and take_env_from_docker_file != 'true':
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+
+print(os.environ.get('DB_CONNECTION_STRING'))
+print(os.environ.get('METIS_API_KEY'))
 
 app = Flask(__name__)
 with app.app_context():
@@ -42,7 +48,7 @@ with app.app_context():
 
     @app.route('/')
     def hello():
-        return {""}
+        return {"hello": "world"}
 
 
     @app.route('/aircraft', methods=['POST', 'GET'])
@@ -69,40 +75,6 @@ with app.app_context():
                 } for aircraft in aircrafts]
 
             return {"count": len(results), "aircrafts": results, "message": "success"}
-
-
-    # @app.route('/cars/<car_id>', methods=['GET', 'PUT', 'DELETE'])
-    # def handle_car(car_id):
-    #     car = CarsModel.query.get_or_404(car_id)
-
-    #     if request.method == 'GET':
-    #         response = {
-    #             "name": car.name,
-    #             "model": car.model,
-    #             "doors": car.doors
-    #         }
-    #         return {"message": "success", "car": response}
-
-    #     elif request.method == 'PUT':
-    #         data = request.get_json()
-    #         car.name = data['name']
-    #         car.model = data['model']
-    #         car.doors = data['doors']
-
-    #         db.session.add(car)
-    #         db.session.commit()
-            
-    #         return {"message": f"car {car.name} successfully updated"}
-
-    #     elif request.method == 'DELETE':
-    #         db.session.delete(car)
-    #         db.session.commit()
-            
-    #         return {"message": f"Car {car.name} successfully deleted."}
-
-
-
-
 
 
     if __name__ == '__main__':
