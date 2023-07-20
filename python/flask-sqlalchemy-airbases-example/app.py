@@ -69,7 +69,7 @@ with app.app_context():
             aircrafts = AirCraftModel.query.all()
             results = [
                 {
-                    "aircraft_code": aircrafts.name,
+                    "aircraft_code": aircrafts.aircraft_code,
                     "model": aircrafts.model,
                     "range": aircrafts.doors
                 } for aircraft in aircrafts]
