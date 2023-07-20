@@ -52,7 +52,7 @@ with app.app_context():
 
 
     @app.route('/aircraft', methods=['POST', 'GET'])
-    def handle_cars():
+    def handle_aircraft():
         if request.method == 'POST':
             if request.is_json:
                 data = request.get_json()
@@ -69,9 +69,9 @@ with app.app_context():
             aircrafts = AirCraftModel.query.all()
             results = [
                 {
-                    "aircraft_code": aircrafts.aircraft_code,
-                    "model": aircrafts.model,
-                    "range": aircrafts.doors
+                    "aircraft_code": aircraft.aircraft_code,
+                    "model": aircraft.model,
+                    "range": aircraft.range
                 } for aircraft in aircrafts]
 
             return {"count": len(results), "aircrafts": results, "message": "success"}
