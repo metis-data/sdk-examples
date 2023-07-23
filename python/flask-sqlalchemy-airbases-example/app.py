@@ -1,5 +1,5 @@
 from click import DateTime
-from flask import Flask, request
+from flask import Flask, request, render_template, jsonify 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import CheckConstraint, Column, Integer, String, Table, UniqueConstraint, TIMESTAMP, text
@@ -89,8 +89,11 @@ def __repr__(self):
 
 
 @app.route('/')
-def metis_example():
-        return {"Metis Example": "Enter the command 127.0.0.1:5000/all_aircraft"}
+def index():
+        return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
     
 
 @app.route('/all_aircraft', methods=[ 'GET'])
@@ -98,9 +101,22 @@ def all_aircraft():
             # Query all records from the flights table
             all_flights = db.session.query(Flight).all()
 
-            # Printing the results
+                    # Create a list to hold the data of all flights
+            flight_data = []
+            
+            # Extract the required data from each flight and append it to the list
             for flight in all_flights:
-                print(flight)
+                # print(flight)
+                flight_data.append({
+                    'flight_id': flight.flight_id,
+                    'flight_no': flight.flight_no,
+                    'scheduled_departure': str(flight.scheduled_departure),
+                    'scheduled_arrival': str(flight.scheduled_arrival),
+                    'status': flight.status
+                })
+
+            # Return the data as a JSON response
+            return jsonify(flight_data)
 
 
 @app.route('/aircraft', methods=['POST', 'GET'])

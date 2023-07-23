@@ -24,10 +24,15 @@ Before you begin, ensure that you have the following software installed on your 
 
 2. Open a terminal and navigate to the project directory.
 
-3. Create a virtual environment and activate it using the following command:
+3. Create a virtual environment and activate it using the following command: ```
+virtualenv env && source env/bin/activate
+```
 
 
-4. Install the required dependencies using Pip from the `requirements.txt` file:
+4. Install the required dependencies using Pip from the `requirements.txt` file: 
+     ```
+    pip install -r requirements.txt
+    ```
 
 5. Obtain your Metis API key and put it in the `.env` file in the project directory.
 

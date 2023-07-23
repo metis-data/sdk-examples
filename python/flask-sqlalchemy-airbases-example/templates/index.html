@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metis Sample App - Flask + SQLAlchemy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            text-align: center;
+            color: #555;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            height: 60px;
+            width: 250px;
+            font-size: 24px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            position: relative; /* For positioning the loader */
+            overflow: hidden; /* To hide the loader initially */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+            /* Add styles for the table */
+            #tableContainer {
+            max-width: 900px;
+            max-height: 650px; /* Set the maximum height */
+            overflow: auto; /* Add scrollbars when content overflows */
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        /* Rest of your existing styles... */
+    </style>
+</head>
+<body>
+    <div class="">
+        <h1>Metis Sample App - Flask + SQLAlchemy</h1>
+        <p>The sample app runs a REST command that executes a slow SQL query. Metis SDK generates an OpenTelemetry trace and sends it to the Metis platform.</p>
+        <p>Click on the button below to run the command.</p>
+        <p>Click here to view recent activity.</p>
+        <div style="display: flex; justify-content: center;">
+            <button onclick="handleClick()">Run Query</button>
+        </div>
+
+        <!-- Table to display the data -->
+        <div id="tableContainer"></div>
+    </div>
+    <script>
+        function handleClick() {
+            const button = document.querySelector('button');
+            button.disabled = true; // Disable the button during loading
+
+            // Make an AJAX request to the route you want to call
+            // In this example, we are calling the 'all_aircraft' route
+            fetch('/all_aircraft', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    displayTable(data)
+                    console.log(data);
+                })
+        }
+
+
+        function displayTable(data) {
+            const tableContainer = document.getElementById('tableContainer');
+            tableContainer.innerHTML = ''; // Clear previous table, if any
+
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+
+            // Create table headers
+            for (const key of Object.keys(data[0])) {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            }
+
+            table.appendChild(headerRow);
+
+            // Create table rows with data
+            for (const item of data) {
+                const row = document.createElement('tr');
+                for (const key of Object.keys(item)) {
+                    const cell = document.createElement('td');
+                    cell.textContent = item[key];
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+
+            tableContainer.appendChild(table);
+        }
+    </script>
+</body>
+</html>
