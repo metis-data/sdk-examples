@@ -34,7 +34,7 @@ Before you begin, ensure that you have the following software installed on your 
 6. Run the Flask API:
 
 
-7. Access the API in your web browser at [http://127.0.0.1:5000/aircraft](http://127.0.0.1:5000/aircraft).
+7. Access the API in your web browser at [http://127.0.0.1:5000/aircraft](http://127.0.0.1:5000/all_aircraft).
 
 8. Open the Metis app and the query span to interact with the API.
 
@@ -52,4 +52,4 @@ Before you begin, ensure that you have the following software installed on your 
 5. Run the Docker container and map the host port to the container port:
 
 
-6. Access the API in your web browser at [http://localhost:8080/aircraft](http://localhost:5000/aircraft).
+6. Access the API in your web browser at [http://localhost:8080/aircraft](http://localhost:5000/all_aircraft).
