@@ -90,7 +90,7 @@ def __repr__(self):
 
 @app.route('/')
 def hello():
-        return {"hello": "world"}
+        return {"Metis Example": "Enter the command 127.0.0.1:5000/airflights"}
     
 
 @app.route('/all_aircraft', methods=[ 'GET'])
