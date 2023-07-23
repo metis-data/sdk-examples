@@ -31,10 +31,12 @@ Before you begin, ensure that you have the following software installed on your 
 
 5. Obtain your Metis API key and put it in the `.env` file in the project directory.
 
-6. Run the Flask API:
+6. Run the Flask API:  ```
+     ./env/bin/flask  run
+    ```
 
 
-7. Access the API in your web browser at [http://127.0.0.1:5000/aircraft](http://127.0.0.1:5000/all_aircraft).
+7. Access the API in your web browser at [http://127.0.0.1:5000/all_aircraft](http://127.0.0.1:5000/all_aircraft).
 
 8. Open the Metis app and the query span to interact with the API.
 
