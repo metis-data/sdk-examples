@@ -1,4 +1,3 @@
-from click import DateTime
 from flask import Flask, request, render_template, jsonify 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -101,7 +100,7 @@ def all_aircraft():
             # Query all records from the flights table
             all_flights = db.session.query(Flight).all()
 
-                    # Create a list to hold the data of all flights
+            # Create a list to hold the data of all flights
             flight_data = []
             
             # Extract the required data from each flight and append it to the list
