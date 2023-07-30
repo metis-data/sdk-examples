@@ -18,7 +18,7 @@ In this short demo you will create a simple Python web app (Flask) which calls a
 Before you begin, ensure that you have the following software installed on your system:
 
 - [Python 3.6](https://www.python.org/downloads/release/python-365/) or higher
-- [Pip](https://pip.pypa.io/en/stable/installing/)
+- [Pip](https://pip.pypa.io/en/stable/installation/)
 - [Virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 
 ## Step 2: Run the Flask Web App
