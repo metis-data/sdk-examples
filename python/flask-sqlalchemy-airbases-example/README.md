@@ -25,7 +25,7 @@ Before you begin, ensure that you have the following software installed on your 
 
 ### Method 1: Running the code locally, using a Terminal
 
-1. Clone the repository from the [Metis GitHub](https://github.com/metis-data/metis-flask-api).
+1. Clone the repository from the [Metis GitHub](https://github.com/metis-data/sdk-examples/tree/main/python/flask-sqlalchemy-airbases-example).
 2. Open a terminal and navigate to the project directory.
 
 3. Create a virtual environment and activate it using the following command: 
