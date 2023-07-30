@@ -63,7 +63,7 @@ virtualenv env && source env/bin/activate
 
 5. Run the Docker container and map the host port to the container port:
 
-6. Access the API in your web browser at [http://localhost:8080/aircraft](http://localhost:5000/all_aircraft).
+6. Access the API in your web browser at [http://localhost:5000](http://localhost:5000).
 
 ## Step 3: Review the Traces in Metis Web App
 Open the Metis web app.  and the query span to interact with the API.
