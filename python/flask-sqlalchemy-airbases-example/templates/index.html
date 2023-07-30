@@ -103,18 +103,33 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
             }
+
+            a {
+            color: #3498db; /* Initial color */
+            font-weight: normal; /* Initial font weight */
+            text-decoration: none;
+            transition: color 0.3s, font-weight 0.3s; /* Add a smooth transition effect */
+        }
+
+        /* Style for the link on hover */
+        a:hover {
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
     <div class="">
         <h1>Metis Sample App - Flask + SQLAlchemy</h1>
-        <p>The sample app runs a REST command that executes a slow SQL query. Metis SDK generates an OpenTelemetry trace and sends it to the Metis platform.</p>
+        <p>The sample app runs a REST command that executes a slow SQL query. Metis SDK generates an OpenTelemetry trace and sends it to the <br /> <a  href="https://app.metisdata.io/projects">Metis platform</a>.</p>
         <div style="display: flex; justify-content: center;">
             <button onclick="handleClick()">Run Query</button>
         </div>
 
         <!-- Table to display the data -->
-        <div id="loader" class="loader"></div>
+        <div style="display: flex; width:100%; flex: 1; justify-content: center; align-items: center;">
+            <div id="loader" class="loader"></div>
+        </div>
+       
         <div id="tableContainer" class="button-2"></div>
     </div>
     <script>

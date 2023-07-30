@@ -9,7 +9,7 @@ In this short demo you will create a simple Python web app (Flask) which calls a
 - **Install** the prerequisites python libraries in a new environment.
 - **Configure** the app using a configuration file. You just need to rovide a **Metis API Key**. The Demo Postgres server is up and running so you won’t need to create it. We provide a connection string. 
 - **Run the Flask web server** locally
-- **Call the REST command**  http://1.0.0.127:5000/airflight. The request takes long seconds to run since it is not efficient. When the query finishes, the web app shows the data (as JSON).  
+- **Call the REST command**  http://localhost:5000. The request takes long seconds to run since it is not efficient. When the query finishes, the web app shows the data (as JSON).  
 - **View the traces** in Metis Web App. View the SQL command, its execution plan and the SQL insights.
 
 
@@ -40,12 +40,14 @@ virtualenv env && source env/bin/activate
  pip install -r requirements.txt
  ```
 
-5. Obtain your Metis API key and put it in the `.env` file in the project directory.
+5. Obtain your Metis API key and put it in the `.env.dev` file in the project directory. (don't forget to rename the file to `.env`)
 
 6. Run the Flask API: 
  ```
  ./env/bin/flask  run
 ```
+
+- **Call the REST command**  http://localhost:5000.  
 
 
 
@@ -65,3 +67,6 @@ virtualenv env && source env/bin/activate
 
 ## Step 3: Review the Traces in Metis Web App
 Open the Metis web app.  and the query span to interact with the API.
+
+
+
