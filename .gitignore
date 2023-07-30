@@ -138,3 +138,6 @@ dmypy.json
 .pyre/
 
 .idea
+
+
+.env

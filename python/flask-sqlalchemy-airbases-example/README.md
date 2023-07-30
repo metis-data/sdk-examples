@@ -27,21 +27,25 @@ Before you begin, ensure that you have the following software installed on your 
 
 1. Clone the repository from the [Metis GitHub](https://github.com/metis-data/metis-flask-api).
 2. Open a terminal and navigate to the project directory.
-3. Create a virtual environment and activate it using the following command: 
-    ```
-    virtualenv env && source env/bin/activate
-    ```
-4. Install the required dependencies using Pip from the `requirements.txt` file: 
-     ```
-    pip install -r requirements.txt
-    ```
-5. Copy the Metis API key and save it in the `.env` file.
 
-6. Run the Flask Web App:  
-    ```
-     ./env/bin/flask  run
-    ```
-7. From your browser call the REST API [http://127.0.0.1:5000/all_aircraft](http://127.0.0.1:5000/all_aircraft). We created a button for that. 
+3. Create a virtual environment and activate it using the following command: 
+```
+virtualenv env && source env/bin/activate
+```
+
+
+4. Install the required dependencies using Pip from the `requirements.txt` file: 
+
+ ```
+ pip install -r requirements.txt
+ ```
+
+5. Obtain your Metis API key and put it in the `.env` file in the project directory.
+
+6. Run the Flask API: 
+ ```
+ ./env/bin/flask  run
+```
 
 
 

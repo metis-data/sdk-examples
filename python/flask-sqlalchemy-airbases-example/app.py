@@ -1,9 +1,8 @@
-from click import DateTime
-from flask import Flask, request, render_template, jsonify 
+from flask import Flask, render_template, jsonify 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import CheckConstraint, Column, Integer, String, Table, UniqueConstraint, TIMESTAMP, text
-from sqlalchemycollector import setup, MetisInstrumentor, PlanCollectType
+from sqlalchemycollector import setup, MetisInstrumentor
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -17,8 +16,6 @@ if take_env_from_docker_file and take_env_from_docker_file != 'true':
     dotenv_path = join(dirname(__file__), '.env')
     load_dotenv(dotenv_path)
 
-print(os.environ.get('DB_CONNECTION_STRING'))
-print(os.environ.get('METIS_API_KEY'))
 
 app = Flask(__name__)
 with app.app_context():
@@ -56,7 +53,7 @@ class Flight(Base):
         return f"<Flight(flight_id={self.flight_id}, flight_no='{self.flight_no}', scheduled_departure='{self.scheduled_departure}', scheduled_arrival='{self.scheduled_arrival}', status='{self.status}')>"
 
 # Define the Table and constraints outside the model
-flights_table = Table('flights_1', Base.metadata,
+flights_table = Table('flights_table', Base.metadata,
     Column('flight_id', Integer, primary_key=True, autoincrement=True),
     Column('flight_no', String(6), nullable=False),
     Column('scheduled_departure', TIMESTAMP(timezone=True), nullable=False),
@@ -72,21 +69,6 @@ flights_table = Table('flights_1', Base.metadata,
     UniqueConstraint('flight_no', 'scheduled_departure', name='flights_flight_no_scheduled_departure_key')
 )
 
-class AirCraftModel(db.Model):
-        __tablename__ = 'aircrafts'
-
-        aircraft_code = db.Column(db.String(3), primary_key=True)
-        model = db.Column(db.Text)
-        range = db.Column(db.Integer)
-
-def __init__(self, aircraft_code, model, range):
-        self.aircraft_code = aircraft_code
-        self.model = model
-        self.range = range
-
-def __repr__(self):
-        return f"<AirCraft {self.aircraft_code}>"
-
 
 @app.route('/')
 def index():
@@ -101,7 +83,7 @@ def all_aircraft():
             # Query all records from the flights table
             all_flights = db.session.query(Flight).all()
 
-                    # Create a list to hold the data of all flights
+            # Create a list to hold the data of all flights
             flight_data = []
             
             # Extract the required data from each flight and append it to the list
@@ -117,32 +99,6 @@ def all_aircraft():
 
             # Return the data as a JSON response
             return jsonify(flight_data)
-
-
-@app.route('/aircraft', methods=['POST', 'GET'])
-def handle_aircraft():
-        if request.method == 'POST':
-            if request.is_json:
-                data = request.get_json()
-                airCraft = AirCraftModel(aircraft_code=data['aircraft_code'], model=data['model'], range=data['range'])
-
-                db.session.add(airCraft)
-                db.session.commit()
-
-                return {"message": f"airCraft {airCraft.aircraft_code} has been created successfully."}
-            else:
-                return {"error": "The request payload is not in JSON format"}
-
-        elif request.method == 'GET':
-            aircrafts = AirCraftModel.query.all()
-            results = [
-                {
-                    "aircraft_code": aircraft.aircraft_code,
-                    "model": aircraft.model,
-                    "range": aircraft.range
-                } for aircraft in aircrafts]
-
-            return {"count": len(results), "aircrafts": results, "message": "success"}
 
 
 if __name__ == '__main__':
