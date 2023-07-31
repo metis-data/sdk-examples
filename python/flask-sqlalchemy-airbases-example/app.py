@@ -82,8 +82,8 @@ if __name__ == '__main__':
 @app.route('/all_aircraft', methods=[ 'GET'])
 def all_aircraft():
             # Query all records from the flights table
-            all_flights = db.session.query(Flight).limit(5)
-            # all_flights = db.session.query(Flight).all()
+          
+            all_flights = db.session.query(Flight).all()
 
             # Create a list to hold the data of all flights
             flight_data = []
