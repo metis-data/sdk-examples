@@ -59,9 +59,15 @@ virtualenv env && source env/bin/activate
 
 3. Obtain your Metis API key and replace `METIS_API_KEY` with your API key in the `Dockerfile`.
 
-4. Build the Docker image using the following command:
+4. Build the Docker image using the following command: 
+```
+docker build -t flask_sqlalchemy_example .
+```
 
 5. Run the Docker container and map the host port to the container port:
+```
+docker run -d --name flask_exm -p 8080:5000 flask_sqlalchemy_example_container
+```
 
 6. Access the API in your web browser at [http://localhost:5000](http://localhost:5000).
 
