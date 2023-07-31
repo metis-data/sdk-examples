@@ -19,7 +19,7 @@ EXPOSE 5000
 # Set the environment variable for Flask
 ENV FLASK_APP=app.py
 ENV DB_CONNECTION_STRING=postgresql://demo_user:demo_user@containers-us-west-97.railway.app:6613/demo
-ENV METIS_API_KEY=<YOUR_API_KEY_HERE>
+ENV METIS_API_KEY=<METIS_API_KEY>
 ENV TAKE_ENV_FROM_DOCKER_FILE=true
 # Run the Flask application
 CMD ["flask", "run", "--host=0.0.0.0"]
