@@ -55,7 +55,7 @@
         }
 
         button:hover {
-            background-color: #2CD3E1;
+            background-color: #405cf5;
         }
 
             /* Add styles for the table */
@@ -87,6 +87,14 @@
         .linkText {
             margin-top: 20px;
             padding-top: 15px;
+        }
+
+        .linkMetisText {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
         }
 
         .loader {
@@ -125,7 +133,7 @@
 <body>
     <div class="">
         <h1>Metis Sample App - Flask + SQLAlchemy</h1>
-        <p>The sample app runs a REST command that executes a slow SQL query. Metis SDK generates an OpenTelemetry trace and sends it to the Metis platform.</p>
+        <p>The sample app runs a REST command that executes a slow SQL query</p>
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
             <button onclick="handleClick()">Run Query</button>
         </div>
@@ -134,10 +142,15 @@
         <div style="display: flex; width:100%; flex: 1; justify-content: center; align-items: center;">
             <div id="loader" class="loader"></div>
         </div>
-        <p id="linkToMetisProject">Your query has been analyzed by Metis! Discover comprehensive insights about it on the <br/> <a target="_blank"  href="https://app.metisdata.io/projects">Metis platform</a>.</p>
+        <div id="linkToMetisProject" class="linkMetisText">
+            <p>Your query has been analyzed by Metis! Discover comprehensive insights about it on the</p> 
+            <p><a target="_blank" id="metisLink"  href='#'>Metis platform</a></p>
+            
+        </div>
         <div id="tableContainer" class="button-2"></div>
     </div>
     <script>
+        var link;
         const linkToMetisProject = document.getElementById('linkToMetisProject');
         linkToMetisProject.style.display = 'none';
         function handleClick() {
@@ -153,10 +166,13 @@
                 .then(response => response.json())
                 .then(data => {
                     loader.style.display = 'none'; // Hide the loader
-                    linkToMetisProject.style.display = 'block';
+                    linkToMetisProject.style.display = 'flex';
                     button.disabled = false; // Enable the button after loading
-                    displayTable(data)
-                    console.log(data);
+                    displayTable(data.data)
+                
+                    link = `https://app.metisdata.io/projects/${data.api_key}`;
+                    metisLink.href = link; // Update the href attribute of the link
+                  
                 }).catch(error => {
                     loader.style.display = 'none'; // Hide the loader on error
                     button.disabled = false; // Enable the button after loading

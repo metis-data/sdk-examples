@@ -26,13 +26,14 @@ with app.app_context():
     db = SQLAlchemy(app)
     migrate = Migrate(app, db)
 
+# METIS Instrumentation scope start
     instrumentation: MetisInstrumentor = setup('flask-web-server-airbases',
                         api_key= os.environ.get('METIS_API_KEY'),
                         service_version='1.1' 
                                             ) 
 
     instrumentation.instrument_app(app, db.get_engine())
-
+# METIS Instrumentation scope end
 
 Base = declarative_base()
 
@@ -81,14 +82,14 @@ if __name__ == '__main__':
 @app.route('/all_aircraft', methods=[ 'GET'])
 def all_aircraft():
             # Query all records from the flights table
-            all_flights = db.session.query(Flight).all()
+            all_flights = db.session.query(Flight).limit(5)
+            # all_flights = db.session.query(Flight).all()
 
             # Create a list to hold the data of all flights
             flight_data = []
             
             # Extract the required data from each flight and append it to the list
             for flight in all_flights:
-                # print(flight)
                 flight_data.append({
                     'flight_id': flight.flight_id,
                     'flight_no': flight.flight_no,
@@ -97,8 +98,12 @@ def all_aircraft():
                     'status': flight.status
                 })
 
+            response_data = {
+                  'data': flight_data,
+                  'api_key': os.environ.get('METIS_API_KEY')
+            }
             # Return the data as a JSON response
-            return jsonify(flight_data)
+            return jsonify(response_data)
 
 
 if __name__ == '__main__':
