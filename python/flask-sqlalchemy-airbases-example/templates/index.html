@@ -133,7 +133,7 @@
 <body>
     <div class="">
         <h1>Metis Sample App - Flask + SQLAlchemy</h1>
-        <p>The sample app runs a REST command that executes a slow SQL query</p>
+        <p>The sample app runs a REST command that executes a slow SQL query (might take over 30 seconds)</p>
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
             <button onclick="handleClick()">Run Query</button>
         </div>
@@ -170,7 +170,7 @@
                     button.disabled = false; // Enable the button after loading
                     displayTable(data.data)
                 
-                    link = `https://app.metisdata.io/projects/${data.api_key}`;
+                    link = `https://app.metisdata.io/projects/${data.api_key}/activities`;
                     metisLink.href = link; // Update the href attribute of the link
                   
                 }).catch(error => {
